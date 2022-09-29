@@ -24,6 +24,18 @@ class Tree
     root
   end
 
+  def insert(value, root = @root)
+    return Node.new(value) if root.nil?
+   
+    if root.data < value
+      root.right = insert(value, root.right)
+    elsif root.data > value
+      root.left = insert(value, root.left)
+    end
+
+    root
+  end
+
   # pretty_print method by a student of the odin project
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
@@ -36,4 +48,7 @@ arr1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 arr2 = [1, 4, 2, 2, 3, 5, 6, 7]
 
 tree = Tree.new(arr2)
+tree.pretty_print
+
+tree.insert(9)
 tree.pretty_print
